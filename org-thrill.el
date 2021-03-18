@@ -1,5 +1,6 @@
-;; packages.el --- gtd Layer packages File for Spacemacs
+;;; package --- gtd Layer packages File for Spacemacs
 
+;;; Commentary:
 ;; List of packages to exclude.
 ;; (defun gtd/init-bbdb()
 ;;   (use-package bbdb
@@ -40,21 +41,17 @@
 ;;                              (t "NameOfCaller")))
 ;;           (insert caller))))))
 
-;; (defun gtd/init-boxquote()
-;;   (use-package boxquote
-;;     :defer t
-;;     :init
-;;     (progn
-;;       (define-key global-map (kbd "<f9> r") 'boxquote-region)
-;;       (define-key global-map (kbd "<f9> f") 'boxquote-insert-file))
-;;     ))
-
+(require 'org)
+(require 'org-checklist)
+(require 'org-capture)
+(require 'org-clock)
+(require 'org-archive)
+(require 'org-protocol)
+(require 'org-agenda)
 (require 'org-habit)
 (require 'org-id)
 
 ;;; Code:
-
-(global-set-key (kbd "<f12>") 'org-agenda)
 
 (setq org-agenda-span 'day)
 
@@ -67,6 +64,8 @@
 
 ;; Compact the block agenda view
 (setq org-agenda-compact-blocks t)
+
+(defvar bh/hide-scheduled-and-waiting-next-tasks t)
 
 ;; Custom agenda command definitions
 (setq org-agenda-custom-commands
@@ -174,10 +173,10 @@
 (setq org-agenda-tags-todo-honor-ignore-options t)
 
 ;; Erase all reminders and rebuilt reminders for today from the agenda
-(defun bh/org-agenda-to-appt ()
-  (interactive)
-  (setq appt-time-msg-list nil)
-  (org-agenda-to-appt))
+;; (defun bh/org-agenda-to-appt ()
+;;   (interactive)
+;;   (setq appt-time-msg-list nil)
+;;   (org-agenda-to-appt))
 
 ;; Rebuild the reminders everytime the agenda is displayed
 (add-hook 'org-finalize-agenda-hook 'bh/org-agenda-to-appt 'append)
@@ -356,7 +355,7 @@ so change the default 'F' binding in the agenda to allow both"
   "Set restriction lock to current task subtree or file if prefix is specified"
   (interactive "p")
   (let* ((pom (bh/get-pom-from-agenda-restriction-or-point))
-         (tags (org-with-point-at pom (org-get-tags-at))))
+         (tags (org-with-point-at pom (org-get-tags))))
     (let ((restriction-type (if (equal arg 4) 'file 'subtree)))
       (save-restriction
         (cond
@@ -422,46 +421,46 @@ so change the default 'F' binding in the agenda to allow both"
     (org-clock-in '(16))))
 
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
-(global-set-key "\C-cb" 'org-switchb)
+;; (global-set-key "\C-cb" 'org-switchb)
 
-;; Custom Key Bindings
-(global-set-key (kbd "<f5>") 'bh/org-todo)
-(global-set-key (kbd "<S-f5>") 'bh/widen)
-(global-set-key (kbd "<f10>") 'bh/set-truncate-lines)
-(global-set-key (kbd "<f8>") 'org-cycle-agenda-files)
-(global-set-key (kbd "<f9> <f9>") 'bh/show-org-agenda)
-(global-set-key (kbd "<f9> c") 'calendar)
-(global-set-key (kbd "<f9> g") 'gnus)
-(global-set-key (kbd "<f9> h") 'bh/hide-other)
-(global-set-key (kbd "<f9> n") 'bh/toggle-next-task-display)
+;; ;; Custom Key Bindings
+;; (global-set-key (kbd "<f5>") 'bh/org-todo)
+;; (global-set-key (kbd "<S-f5>") 'bh/widen)
+;; (global-set-key (kbd "<f10>") 'bh/set-truncate-lines)
+;; (global-set-key (kbd "<f8>") 'org-cycle-agenda-files)
+;; (global-set-key (kbd "<f9> <f9>") 'bh/show-org-agenda)
+;; (global-set-key (kbd "<f9> c") 'calendar)
+;; (global-set-key (kbd "<f9> g") 'gnus)
+;; (global-set-key (kbd "<f9> h") 'bh/hide-other)
+;; (global-set-key (kbd "<f9> n") 'bh/toggle-next-task-display)
 
-(global-set-key (kbd "<f9> I") 'bh/punch-in)
-(global-set-key (kbd "<f9> O") 'bh/punch-out)
+;; (global-set-key (kbd "<f9> I") 'bh/punch-in)
+;; (global-set-key (kbd "<f9> O") 'bh/punch-out)
 
-(global-set-key (kbd "<f9> o") 'bh/make-org-scratch)
+;; (global-set-key (kbd "<f9> o") 'bh/make-org-scratch)
 
-(global-set-key (kbd "<f9> s") 'bh/switch-to-scratch)
+;; (global-set-key (kbd "<f9> s") 'bh/switch-to-scratch)
 
-(global-set-key (kbd "<f9> S") 'org-save-all-org-buffers)
+;; (global-set-key (kbd "<f9> S") 'org-save-all-org-buffers)
 
-(global-set-key (kbd "<f9> t") 'bh/insert-inactive-timestamp)
-(global-set-key (kbd "<f9> T") 'bh/toggle-insert-inactive-timestamp)
+;; (global-set-key (kbd "<f9> t") 'bh/insert-inactive-timestamp)
+;; (global-set-key (kbd "<f9> T") 'bh/toggle-insert-inactive-timestamp)
 
-(global-set-key (kbd "<f9> v") 'visible-mode)
-(global-set-key (kbd "<f9> l") 'org-toggle-link-display)
-(global-set-key (kbd "<f9> SPC") 'bh/clock-in-last-task)
-(global-set-key (kbd "C-<f9>") 'previous-buffer)
-(global-set-key (kbd "M-<f9>") 'org-toggle-inline-images)
-(global-set-key (kbd "C-<f10>") 'next-buffer)
-(global-set-key (kbd "S-<f11>") 'org-clock-goto)
-(global-set-key (kbd "C-<f11>") 'org-clock-in)
+;; (global-set-key (kbd "<f9> v") 'visible-mode)
+;; (global-set-key (kbd "<f9> l") 'org-toggle-link-display)
+;; (global-set-key (kbd "<f9> SPC") 'bh/clock-in-last-task)
+;; (global-set-key (kbd "C-<f9>") 'previous-buffer)
+;; (global-set-key (kbd "M-<f9>") 'org-toggle-inline-images)
+;; (global-set-key (kbd "C-<f10>") 'next-buffer)
+;; (global-set-key (kbd "S-<f11>") 'org-clock-goto)
+;; (global-set-key (kbd "C-<f11>") 'org-clock-in)
 ;; (global-set-key (kbd "C-s-<f12>") 'bh/save-then-publish)
 
 (defun bh/hide-other ()
   (interactive)
   (save-excursion
     (org-back-to-heading 'invisible-ok)
-    (hide-other)
+    (outline-hide-other)
     (org-cycle)
     (org-cycle)
     (org-cycle)))
@@ -558,7 +557,7 @@ so change the default 'F' binding in the agenda to allow both"
                                  (org-agenda-files :maxlevel . 9))))
 
 ;; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t)
+(setq org-refile-use-outline-path 'file)
 
 ;; ;; Targets complete directly with IDO
 (setq org-outline-path-complete-in-steps nil)
@@ -567,7 +566,6 @@ so change the default 'F' binding in the agenda to allow both"
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
 ;;   ;; ;; Use IDO for both buffer and file completion and ido-everywhere to t
-(setq org-completion-use-ido nil)
 ;;   ;; (setq ido-everywhere t)
 ;;   ;; (setq ido-max-directory-size 100000)
 ;;   ;; (ido-mode (quote both))
@@ -613,7 +611,7 @@ so change the default 'F' binding in the agenda to allow both"
 ;; Resume clocking task when emacs is restarted
 (org-clock-persistence-insinuate)
 
-(setq bh/keep-clock-running nil)
+(defvar bh/keep-clock-running nil)
 
 (defun bh/clock-in-to-next (kw)
   "Switch a task from TODO to NEXT when clocking in.
@@ -825,8 +823,6 @@ Callers of this function already widen the buffer view."
     (setq org-tags-match-list-sublevels nil))
   nil)
 
-(defvar bh/hide-scheduled-and-waiting-next-tasks t)
-
 (defun bh/toggle-next-task-display ()
   (interactive)
   (setq bh/hide-scheduled-and-waiting-next-tasks (not bh/hide-scheduled-and-waiting-next-tasks))
@@ -845,7 +841,7 @@ Callers of this function already widen the buffer view."
             (save-excursion
               (forward-line 1)
               (while (and (not has-next) (< (point) subtree-end) (re-search-forward "^\\*+ NEXT " subtree-end t))
-                (unless (member "WAITING" (org-get-tags-at))
+                (unless (member "WAITING" (org-get-tags))
                   (setq has-next t))))
             (if has-next
                 nil
@@ -1285,6 +1281,6 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 
 ;; Variable org-show-entry-below is deprecated
 ;; (setq org-show-entry-below (quote ((default))))
-(provide 'org-thrill)
 
-;; EOF
+(provide 'org-thrill)
+;;; org-thrill.el ends here
