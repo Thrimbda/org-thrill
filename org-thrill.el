@@ -529,7 +529,7 @@ so change the default 'F' binding in the agenda to allow both"
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("b" "book" entry (file "~/OneDrive/cone/books.org")
                "* TODO Read %? :BOOK:\n%U" :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+datetree "~/OneDrive/cone/diary.org")
+              ("j" "Journal" entry (file+olp+datetree "~/OneDrive/cone/diary.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/OneDrive/cone/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
