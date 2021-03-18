@@ -1285,5 +1285,6 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 
 ;; Variable org-show-entry-below is deprecated
 ;; (setq org-show-entry-below (quote ((default))))
+(provide 'org-thrill)
 
 ;; EOF
