@@ -183,7 +183,7 @@
 ;;   (org-agenda-to-appt))
 
 ;; Rebuild the reminders everytime the agenda is displayed
-(add-hook 'org-finalize-agenda-hook 'bh/org-agenda-to-appt 'append)
+;; (add-hook 'org-finalize-agenda-hook 'bh/org-agenda-to-appt 'append)
 
 ;; ;; WARNING!!! Following function call will drastically increase spacemacs launch time.
 ;; ;; This is at the end of my .emacs - so appointments are set up when Emacs starts
@@ -425,8 +425,8 @@ so change the default 'F' binding in the agenda to allow both"
 
 ;; Enable display of the time grid so we can see the marker for the current time
 (setq org-agenda-time-grid (quote ((daily today remove-match)
-                                   #("----------------" 0 16 (org-heading t))
-                                   (0900 1100 1300 1500 1700))))
+                                   (0900 1100 1300 1500 1700)
+                                   "......" "----------------")))
 
 ;; Display tags farther right
 (setq org-agenda-tags-column -102)
