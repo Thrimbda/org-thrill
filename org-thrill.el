@@ -425,7 +425,7 @@ so change the default 'F' binding in the agenda to allow both"
 
 ;; Enable display of the time grid so we can see the marker for the current time
 (setq org-agenda-time-grid (quote ((daily today remove-match)
-                                   (0900 1100 1300 1500 1700)
+                                   (0900 1100 1300 1500 1700 1900 2100)
                                    "......" "----------------")))
 
 ;; Display tags farther right
@@ -856,6 +856,7 @@ A prefix arg forces clock in of the default task."
                             ("WAITING" . ?w)
                             ("HOLD" . ?h)
                             ("PERSONAL" . ?P)
+                            ("ITERATIVE" . ?i)
                             ("WORK" . ?W)
                             ("FARM" . ?F)
                             ("ORG" . ?O)
