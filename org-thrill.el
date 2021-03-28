@@ -54,6 +54,7 @@
 ;;; Code:
 
 (setq org-agenda-span 'day)
+(setq org-agenda-start-day nil)
 
 (if (boundp 'org-user-agenda-files)
     (setq org-agenda-files org-user-agenda-files)
@@ -859,6 +860,8 @@ A prefix arg forces clock in of the default task."
                             ("ITERATIVE" . ?i)
                             ("WORK" . ?W)
                             ("FARM" . ?F)
+                            ("BUG" . ?b)
+                            ("CODING" . ?C)
                             ("ORG" . ?O)
                             ("BYTEDANCE" . ?B)
                             ("crypt" . ?E)
