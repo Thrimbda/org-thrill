@@ -867,6 +867,7 @@ A prefix arg forces clock in of the default task."
                             ("BYTEDANCE" . ?B)
                             ("NOTE" . ?n)
                             ("CANCELLED" . ?c)
+                            ("AMUSEMENT" . ?A)
                             ("FLAGGED" . ??))))
 
 ;; Allow setting single tags without the menu
