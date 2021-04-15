@@ -858,6 +858,7 @@ A prefix arg forces clock in of the default task."
                             ("HOLD" . ?h)
                             ("PERSONAL" . ?P)
                             ("ITERATIVE" . ?i)
+                            ("SLACK" . ?S)
                             ("WORK" . ?W)
                             ("LEARNING" ?L)
                             ("BUG" . ?b)
