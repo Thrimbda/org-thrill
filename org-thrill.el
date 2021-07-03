@@ -635,6 +635,8 @@ so change the default 'F' binding in the agenda to allow both"
 
 (setq org-directory "~/OneDrive/cone")
 
+(defvar org-files (directory-files-recursively org-directory org-agenda-file-regexp t '(lambda (name) (not (eq name "ref")))))
+
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls,
 ;; meetings, and org-protocol
 (setq org-capture-templates
@@ -670,7 +672,7 @@ so change the default 'F' binding in the agenda to allow both"
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 
 ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
+(setq org-refile-targets (quote ((org-files :maxlevel . 9)
                                  (org-agenda-files :maxlevel . 9))))
 
 ;; Use full outline paths for refile targets - we file directly with IDO
