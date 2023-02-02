@@ -666,8 +666,7 @@ so change the default 'F' binding in the agenda to allow both"
     (beginning-of-line 0)
     ;; Following line from original document by Bernt Hansen
     ;; will lead to an error, next to it is the corrected form.
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
-    ;; (org-remove-empty-drawer-at (point))))
+    (org-remove-empty-drawer-at (point))))
 
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 
