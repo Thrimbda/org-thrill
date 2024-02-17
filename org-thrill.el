@@ -474,42 +474,43 @@ A prefix arg forces clock in of the default task."
 ; For tag searches ignore tasks with scheduled and deadline dates
 (setq org-agenda-tags-todo-honor-ignore-options t)
 
-(require 'bbdb)
-(require 'bbdb-com)
+;; ISSUE: we don't need this
+;; (require 'bbdb)
+;; (require 'bbdb-com)
 
 ;; (global-set-key (kbd "<f9> p") 'bh/phone-call)
 
 ;;
 ;; Phone capture template handling with BBDB lookup
 ;; Adapted from code by Gregory J. Grubbs
-(defun bh/phone-call ()
-  "Return name and company info for caller from bbdb lookup"
-  (interactive)
-  (let* (name rec caller)
-    (setq name (completing-read "Who is calling? "
-                                (bbdb-hashtable)
-                                'bbdb-completion-predicate
-                                'confirm))
-    (when (> (length name) 0)
-      ; Something was supplied - look it up in bbdb
-      (setq rec
-            (or (first
-                 (or (bbdb-search (bbdb-records) name nil nil)
-                     (bbdb-search (bbdb-records) nil name nil)))
-                name)))
+;; (defun bh/phone-call ()
+;;   "Return name and company info for caller from bbdb lookup"
+;;   (interactive)
+;;   (let* (name rec caller)
+;;     (setq name (completing-read "Who is calling? "
+;;                                 (bbdb-hashtable)
+;;                                 'bbdb-completion-predicate
+;;                                 'confirm))
+;;     (when (> (length name) 0)
+;;       ; Something was supplied - look it up in bbdb
+;;       (setq rec
+;;             (or (first
+;;                  (or (bbdb-search (bbdb-records) name nil nil)
+;;                      (bbdb-search (bbdb-records) nil name nil)))
+;;                 name)))
 
-    ; Build the bbdb link if we have a bbdb record, otherwise just return the name
-    (setq caller (cond ((and rec (vectorp rec))
-                        (let ((name (bbdb-record-name rec))
-                              (company (bbdb-record-company rec)))
-                          (concat "[[bbdb:"
-                                  name "]["
-                                  name "]]"
-                                  (when company
-                                    (concat " - " company)))))
-                       (rec)
-                       (t "NameOfCaller")))
-    (insert caller)))
+;;     ; Build the bbdb link if we have a bbdb record, otherwise just return the name
+;;     (setq caller (cond ((and rec (vectorp rec))
+;;                         (let ((name (bbdb-record-name rec))
+;;                               (company (bbdb-record-company rec)))
+;;                           (concat "[[bbdb:"
+;;                                   name "]["
+;;                                   name "]]"
+;;                                   (when company
+;;                                     (concat " - " company)))))
+;;                        (rec)
+;;                        (t "NameOfCaller")))
+;;     (insert caller)))
 
 (setq org-agenda-span 'day)
 
@@ -1551,7 +1552,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-clock-sound "/usr/local/lib/tngchime.wav")
 
 ; Enable habit tracking (and a bunch of other modules)
-(setq org-modules (quote (org-bbdb
+(setq org-modules (quote (
+                          ;; org-bbdb
                           org-bibtex
                           org-crypt
                           org-gnus
@@ -1719,7 +1721,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 
-;; ISSUE: don't need smex since we are using doom
+;; ISSUE: we don't need smex since we are using doom
 ;; (require 'smex)
 ;; (smex-initialize)
 
@@ -1732,7 +1734,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (global-set-key (kbd "<C-f6>") '(lambda () (interactive) (bookmark-set "SAVED")))
 (global-set-key (kbd "<f6>") '(lambda () (interactive) (bookmark-jump "SAVED")))
 
-(require 'org-mime)
+;; ISSUE: we don't need to send emails from emacs
+;; (require 'org-mime)
 
 (setq org-agenda-skip-additional-timestamps-same-entry t)
 
@@ -1776,7 +1779,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 
 (add-hook 'message-mode-hook 'orgstruct++-mode 'append)
 (add-hook 'message-mode-hook 'turn-on-auto-fill 'append)
-(add-hook 'message-mode-hook 'bbdb-define-all-aliases 'append)
+;; (add-hook 'message-mode-hook 'bbdb-define-all-aliases 'append)
 (add-hook 'message-mode-hook 'orgtbl-mode 'append)
 (add-hook 'message-mode-hook 'turn-on-flyspell 'append)
 (add-hook 'message-mode-hook
