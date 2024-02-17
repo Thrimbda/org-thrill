@@ -145,7 +145,8 @@
   (interactive)
   (save-excursion
     (beginning-of-line 0)
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+    ;; ISSUE: bh/remove-empty-drawer-on-clock-out: Wrong number of arguments: #<subr org-remove-empty-drawer-at>, 2
+    (org-remove-empty-drawer-at (point))))
 
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 
