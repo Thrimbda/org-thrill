@@ -1718,12 +1718,14 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-agenda-persistent-filter t)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(require 'smex)
-(smex-initialize)
 
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-x x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; ISSUE: don't need smex since we are using doom
+;; (require 'smex)
+;; (smex-initialize)
+
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "C-x x") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; Bookmark handling
 ;;
